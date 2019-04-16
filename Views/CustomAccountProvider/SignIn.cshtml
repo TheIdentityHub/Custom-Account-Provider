@@ -1,0 +1,34 @@
+﻿@using U2UConsult.DemoAccountProvider;
+@model CustomAccountProviderSignInViewModel
+@{
+    ViewBag.Title = "Custom Account Provider Logon";
+    Layout = "~/Views/Shared/_ParentLayout.cshtml";
+}
+<section class="large center-content">
+
+    <h1>"Custom Account Provider Logon"</h1>
+
+    @using (Html.BeginForm("SignIn", "CustomAccountProvider", FormMethod.Post, null))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationBox()
+        @Html.HiddenFor(m => m.ReturnUrl)
+        @Html.HiddenFor(m => m.State)
+        @Html.HiddenFor(m => m.CustomParameter)
+        <div class="form-group">
+            @Html.LabelFor(m => m.UserName)
+            @Html.TextBoxFor(m => m.UserName, new { @class = "normal focus" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password, new { @class = "normal" })
+        </div>
+        <div class="form-actions">
+            <input class="btn btn-default" type="submit" value="Custom Sign In" />
+        </div>
+    }
+</section>
+
+@section scripts {
+    @Scripts.Render("~/bundles/formval")
+}
